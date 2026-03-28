@@ -1,6 +1,7 @@
 package racingcar;
 import java.util.*;
 import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Application {
 
@@ -8,10 +9,7 @@ public class Application {
         // TODO: 프로그램 구현
         ArrayList<Car> Cars = inputCars();
         int round = inputRound();
-        for(int i = 0; i < Cars.size(); i++){
-            System.out.println(Cars.get(i).name);
-        }
-        System.out.println(round);
+        rounding(round, Cars);
     }
 
     static class Car {
@@ -65,5 +63,36 @@ public class Application {
         }
         System.out.println(" ");
         return round;
+    }
+
+    private static ArrayList<Car> racing(ArrayList<Car> Cars){
+        int random = 0;
+        for (int i = 0; i < Cars.size(); i++){
+            random = Randoms.pickNumberInRange(0, 9);
+            if(random >= 4){
+                Cars.get(i).score++;
+            }
+        }
+        return Cars;
+    }
+
+    private static ArrayList<Car> rounding(int round, ArrayList<Car> Cars){
+        System.out.println("실행 결과");
+        for (int i = 0; i < round; i++){
+            racing(Cars);
+            chart(Cars);
+            System.out.println(" ");
+        }
+        return Cars;
+    }
+
+    private static void chart(ArrayList<Car> Cars){
+        for(int i = 0; i < Cars.size(); i++){
+            System.out.print(Cars.get(i).name + " : ");
+            for(int j = 0; j < Cars.get(i).score; j++){
+                System.out.print("-");
+            }
+            System.out.println(" ");
+        }
     }
 }
