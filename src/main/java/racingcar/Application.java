@@ -8,6 +8,7 @@ public class Application {
         // TODO: 프로그램 구현
         Scanner scanner = new Scanner(System.in);
 
+        int round;
         class Car {
             String name;
             int score = 0;
@@ -27,7 +28,12 @@ public class Application {
         }
 
         System.out.println("시도할 회수는 몇회인가요?");
-        int round = scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            round = scanner.nextInt();
+        } else {
+            throw new IllegalArgumentException();
+        }
+
         if(round <= 0){
             throw new IllegalArgumentException();
         }
