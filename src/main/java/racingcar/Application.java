@@ -9,12 +9,15 @@ public class Application {
         // TODO: 프로그램 구현
         ArrayList<Car> Cars = inputCars();
         int round = inputRound();
-        rounding(round, Cars);
+        Cars = rounding(round, Cars);
+        Cars = compare1(Cars);
+        award(Cars);
     }
 
     static class Car {
         String name;
         int score = 0;
+        boolean winner = true;
 
         Car(String name) {
             this.name = name;
@@ -93,6 +96,35 @@ public class Application {
                 System.out.print("-");
             }
             System.out.println(" ");
+        }
+    }
+
+    private static ArrayList<Car> compare1(ArrayList<Car> Cars){
+        for(int i = 0; i < Cars.size(); i++){
+            Cars.get(i).winner = compare2(Cars, i);
+        }
+        return Cars;
+    }
+
+    private static boolean compare2(ArrayList<Car> Cars, int i){
+        for(int j = i + 1; j < Cars.size() ; j++){
+            if(Cars.get(i).score < Cars.get(j).score) return false;
+        }
+        return true;
+    }
+
+    private static void award(ArrayList<Car> Cars) {
+        boolean flag = true;
+        System.out.print("최종 우승자 : ");
+        for (int i = 0; i < Cars.size(); i++){
+            if(Cars.get(i).winner && !flag){
+                System.out.print(", ");
+                System.out.print(Cars.get(i).name);
+            }
+            if(Cars.get(i).winner && flag) {
+                System.out.print(Cars.get(i).name);
+                flag = false;
+            }
         }
     }
 }
