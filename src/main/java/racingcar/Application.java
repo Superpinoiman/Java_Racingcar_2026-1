@@ -24,7 +24,11 @@ public class Application {
         String[] names = input.split(",");
 
         for(int i = 0; i < names.length; i++){
-            Cars.add(new Car(names[i]));
+            if(names[i].length() > 5){
+                throw new IllegalArgumentException();
+            } else {
+                Cars.add(new Car(names[i]));
+            }
         }
 
         System.out.println("시도할 회수는 몇회인가요?");
