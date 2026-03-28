@@ -31,6 +31,12 @@ public class Application {
             }
         }
 
+        for(int i = 0; i < Cars.size(); i++){
+            for(int j = i + 1; j < Cars.size(); j++){
+
+            }
+        }
+
         System.out.println("시도할 회수는 몇회인가요?");
 
         if (scanner.hasNextInt()) {
