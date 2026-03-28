@@ -23,6 +23,16 @@ public class Application {
         }
     }
 
+    private static boolean nameAgain(ArrayList<Car> Cars){
+        Set<String> nameSet = new HashSet<>();
+        for(int i = 0; i < Cars.size() ; i++) {
+            if (!nameSet.add(Cars.get(i).name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static ArrayList<Car> inputCars(){
         ArrayList<Car> Cars = new ArrayList<>();
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
@@ -36,6 +46,9 @@ public class Application {
                 Cars.add(new Car(names[i]));
             }
         }
+        if(nameAgain(Cars)){
+            throw new IllegalArgumentException();
+        }
         return Cars;
     }
 
@@ -44,13 +57,9 @@ public class Application {
         int round = 0;
         try {
             round = Integer.parseInt(Console.readLine().trim());
-            if(round <= 0){
-                throw new IllegalArgumentException();
-            }
         } catch(NumberFormatException e){
             throw new IllegalArgumentException();
         }
-
         if(round <= 0){
             throw new IllegalArgumentException();
         }
