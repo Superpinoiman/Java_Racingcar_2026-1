@@ -24,7 +24,7 @@ public class Application {
         String[] names = input.split(",");
 
         for(int i = 0; i < names.length; i++){
-            if(names[i].length() > 5 || names[i].contains(" ")){
+            if(names[i].length() > 5 || names[i].contains(" ") || names[i].isEmpty()){
                 throw new IllegalArgumentException();
             } else {
                 Cars.add(new Car(names[i]));
