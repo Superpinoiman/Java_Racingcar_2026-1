@@ -10,24 +10,14 @@ public class Application {
         ArrayList<Car> Cars = inputCars();
         int round = inputRound();
         Cars = rounding(round, Cars);
-        Cars = compare1(Cars);
+        Cars = findWinner(Cars);
         award(Cars);
-    }
-
-    static class Car {
-        String name;
-        int score = 0;
-        boolean winner = true;
-
-        Car(String name) {
-            this.name = name;
-        }
     }
 
     private static boolean nameAgain(ArrayList<Car> Cars){
         Set<String> nameSet = new HashSet<>();
         for(int i = 0; i < Cars.size() ; i++) {
-            if (!nameSet.add(Cars.get(i).name)) {
+            if (!nameSet.add(Cars.get(i).getName())) {
                 return true;
             }
         }
@@ -73,7 +63,7 @@ public class Application {
         for (int i = 0; i < Cars.size(); i++){
             random = Randoms.pickNumberInRange(0, 9);
             if(random >= 4){
-                Cars.get(i).score++;
+                Cars.get(i).move();
             }
         }
         return Cars;
@@ -91,38 +81,42 @@ public class Application {
 
     private static void chart(ArrayList<Car> Cars){
         for(int i = 0; i < Cars.size(); i++){
-            System.out.print(Cars.get(i).name + " : ");
-            for(int j = 0; j < Cars.get(i).score; j++){
+            System.out.print(Cars.get(i).getName() + " : ");
+            for(int j = 0; j < Cars.get(i).getScore(); j++){
                 System.out.print("-");
             }
             System.out.println(" ");
         }
     }
 
-    private static ArrayList<Car> compare1(ArrayList<Car> Cars){
-        for(int i = 0; i < Cars.size(); i++){
-            Cars.get(i).winner = compare2(Cars, i);
-        }
-        return Cars;
-    }
+    private static ArrayList<Car> findWinner(ArrayList<Car> Cars){
+        int maxScore = 0;
 
-    private static boolean compare2(ArrayList<Car> Cars, int i){
-        for(int j = i + 1; j < Cars.size() ; j++){
-            if(Cars.get(i).score < Cars.get(j).score) return false;
+        for(int i = 0; i < Cars.size(); i++){
+            if(Cars.get(i).getScore() >= maxScore){
+                maxScore = Cars.get(i).getScore();
+            }
         }
-        return true;
+
+        for(int i = 0; i < Cars.size(); i++){
+            if(Cars.get(i).getScore() == maxScore){
+                Cars.get(i).win();
+            }
+        }
+
+        return Cars;
     }
 
     private static void award(ArrayList<Car> Cars) {
         boolean flag = true;
         System.out.print("최종 우승자 : ");
         for (int i = 0; i < Cars.size(); i++){
-            if(Cars.get(i).winner && !flag){
+            if(Cars.get(i).isWinner() && !flag){
                 System.out.print(", ");
-                System.out.print(Cars.get(i).name);
+                System.out.print(Cars.get(i).getName());
             }
-            if(Cars.get(i).winner && flag) {
-                System.out.print(Cars.get(i).name);
+            if(Cars.get(i).isWinner() && flag) {
+                System.out.print(Cars.get(i).getName());
                 flag = false;
             }
         }
