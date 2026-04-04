@@ -9,16 +9,16 @@ public class Car {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public int getScore(){
+    public int getScore() {
         return this.score;
     }
 
-    public boolean isWinner(){
-        if(this.winner) {
+    public boolean isWinner() {
+        if (this.winner) {
             return true;
         }
         return false;
@@ -28,7 +28,7 @@ public class Car {
         this.score++;
     }
 
-    public void win(){
+    public void win() {
         this.winner = true;
     }
 }
