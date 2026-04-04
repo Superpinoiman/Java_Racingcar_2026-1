@@ -12,10 +12,13 @@ public class Race {
 
     Race(){}
 
-    public ArrayList<Car> raceStart(){
+    public void raceStart(){
         cars = this.setupCars();
         round = this.inputRound();
         cars = this.progressRounds(round, cars);
+    }
+
+    public ArrayList<Car> getCars(){
         return cars;
     }
 
