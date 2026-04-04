@@ -3,32 +3,35 @@ package racingcar;
 import java.util.ArrayList;
 
 public class RaceResult {
-    RaceResult(){}
+    private ArrayList<Car> cars;
+    RaceResult(ArrayList<Car> cars){
+        this.cars = cars;
+    }
 
-    public void printWinner(ArrayList<Car> cars) {
+    public void printWinner() {
         boolean flag = true;
 
-        cars = this.findWinner(cars);
+        this.findWinner();
         System.out.print("최종 우승자 : ");
 
-        for (int i = 0; i < cars.size(); i++){
-            if(cars.get(i).isWinner() && !flag){
+        for (int i = 0; i < this.cars.size(); i++){
+            if(this.cars.get(i).isWinner() && !flag){
                 System.out.print(", ");
-                System.out.print(cars.get(i).getName());
+                System.out.print(this.cars.get(i).getName());
             }
-            if(cars.get(i).isWinner() && flag) {
-                System.out.print(cars.get(i).getName());
+            if(this.cars.get(i).isWinner() && flag) {
+                System.out.print(this.cars.get(i).getName());
                 flag = false;
             }
         }
     }
 
-    private ArrayList<Car> findWinner(ArrayList<Car> cars){
+    private void findWinner(){
         int maxScore = 0;
 
-        for(int i = 0; i < cars.size(); i++){
-            if(cars.get(i).getScore() >= maxScore){
-                maxScore = cars.get(i).getScore();
+        for(int i = 0; i < this.cars.size(); i++){
+            if(this.cars.get(i).getScore() >= maxScore){
+                maxScore = this.cars.get(i).getScore();
             }
         }
 
@@ -37,6 +40,5 @@ public class RaceResult {
                 cars.get(i).win();
             }
         }
-        return cars;
     }
 }
