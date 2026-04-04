@@ -6,8 +6,7 @@ public class RaceResult {
     RaceResult(){}
 
     public void showResult(ArrayList<Car> cars){
-        cars = this.findWinner(cars);
-        this.award(cars);
+        this.printWinner(this.findWinner(cars));
     }
 
     private ArrayList<Car> findWinner(ArrayList<Car> cars){
@@ -28,7 +27,7 @@ public class RaceResult {
         return cars;
     }
 
-    private void award(ArrayList<Car> cars) {
+    private void printWinner(ArrayList<Car> cars) {
         boolean flag = true;
         System.out.print("최종 우승자 : ");
 

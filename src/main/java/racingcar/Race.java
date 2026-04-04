@@ -15,7 +15,7 @@ public class Race {
     public void raceStart(){
         cars = this.setupCars();
         round = this.inputRound();
-        cars = this.progressRounds(round, cars);
+        this.progressRounds(round, cars);
     }
 
     public ArrayList<Car> getCars(){
@@ -53,7 +53,7 @@ public class Race {
 
     private int inputRound(){
         System.out.println("시도할 회수는 몇회인가요?");
-        int round = 0;
+        int round;
 
         try {
             round = Integer.parseInt(Console.readLine().trim());
@@ -67,8 +67,8 @@ public class Race {
         return round;
     }
 
-    private ArrayList<Car> moveCars(ArrayList<Car> cars){
-        int random = 0;
+    private void moveCars(ArrayList<Car> cars){
+        int random;
 
         for (int i = 0; i < cars.size(); i++){
             random = Randoms.pickNumberInRange(0, 9);
@@ -76,7 +76,6 @@ public class Race {
                 cars.get(i).move();
             }
         }
-        return cars;
     }
 
     private void printScore(ArrayList<Car> cars){
@@ -89,13 +88,12 @@ public class Race {
         }
     }
 
-    private ArrayList<Car> progressRounds(int round, ArrayList<Car> cars){
+    private void progressRounds(int round, ArrayList<Car> cars){
         System.out.println("실행 결과");
         for (int i = 0; i < round; i++){
             moveCars(cars);
             printScore(cars);
             System.out.println(" ");
         }
-        return cars;
     }
 }
