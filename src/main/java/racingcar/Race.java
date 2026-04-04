@@ -39,9 +39,8 @@ public class Race {
         for(int i = 0; i < names.length; i++){
             if(names[i].length() > 5 || names[i].contains(" ") || names[i].isEmpty()){
                 throw new IllegalArgumentException();
-            } else {
-                cars.add(new Car(names[i]));
             }
+            cars.add(new Car(names[i]));
         }
         if(nameAgain(cars)){
             throw new IllegalArgumentException();
