@@ -13,13 +13,13 @@ public class Race {
     Race(){}
 
     public ArrayList<Car> raceStart(){
-        cars = this.inputCars();
+        cars = this.setupCars();
         round = this.inputRound();
-        cars = this.rounding(round, cars);
+        cars = this.progressRounds(round, cars);
         return cars;
     }
 
-    private boolean nameAgain(ArrayList<Car> cars){
+    private boolean isDuplicateName(ArrayList<Car> cars){
         Set<String> nameSet = new HashSet<>();
 
         for(int i = 0; i < cars.size() ; i++) {
@@ -30,7 +30,7 @@ public class Race {
         return false;
     }
 
-    private ArrayList<Car> inputCars(){
+    private ArrayList<Car> setupCars(){
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String input = Console.readLine();
         String[] names = input.split(",");
@@ -42,7 +42,7 @@ public class Race {
             }
             cars.add(new Car(names[i]));
         }
-        if(nameAgain(cars)){
+        if(isDuplicateName(cars)){
             throw new IllegalArgumentException();
         }
         return cars;
@@ -64,7 +64,7 @@ public class Race {
         return round;
     }
 
-    private ArrayList<Car> racing(ArrayList<Car> cars){
+    private ArrayList<Car> moveCars(ArrayList<Car> cars){
         int random = 0;
 
         for (int i = 0; i < cars.size(); i++){
@@ -76,7 +76,7 @@ public class Race {
         return cars;
     }
 
-    private void chart(ArrayList<Car> cars){
+    private void printScore(ArrayList<Car> cars){
         for(int i = 0; i < cars.size(); i++){
             System.out.print(cars.get(i).getName() + " : ");
             for(int j = 0; j < cars.get(i).getScore(); j++){
@@ -86,11 +86,11 @@ public class Race {
         }
     }
 
-    private ArrayList<Car> rounding(int round, ArrayList<Car> Cars){
+    private ArrayList<Car> progressRounds(int round, ArrayList<Car> Cars){
         System.out.println("실행 결과");
         for (int i = 0; i < round; i++){
-            racing(Cars);
-            chart(Cars);
+            moveCars(Cars);
+            printScore(Cars);
             System.out.println(" ");
         }
         return Cars;
