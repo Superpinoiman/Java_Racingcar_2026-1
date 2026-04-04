@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Race {
-    private ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<Car> cars;
     private int round = 0;
 
     Race(){}
@@ -86,13 +86,13 @@ public class Race {
         }
     }
 
-    private ArrayList<Car> progressRounds(int round, ArrayList<Car> Cars){
+    private ArrayList<Car> progressRounds(int round, ArrayList<Car> cars){
         System.out.println("실행 결과");
         for (int i = 0; i < round; i++){
-            moveCars(Cars);
-            printScore(Cars);
+            moveCars(cars);
+            printScore(cars);
             System.out.println(" ");
         }
-        return Cars;
+        return cars;
     }
 }
