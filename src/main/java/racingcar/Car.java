@@ -31,4 +31,5 @@ public class Car {
     public void win(){
         this.winner = true;
     }
+
 }
