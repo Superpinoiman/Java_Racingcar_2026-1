@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Race {
-    public ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
     private int round = 0;
 
     Race(){}
