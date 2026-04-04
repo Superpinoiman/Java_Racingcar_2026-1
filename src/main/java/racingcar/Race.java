@@ -1,70 +1,19 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+
 
 public class Race {
-    private ArrayList<Car> cars;
-    private int round = 0;
-
     Race(){}
 
-    public void raceStart(){
-        cars = this.setupCars();
-        round = this.inputRound();
-        this.progressRounds(round, cars);
-    }
-
-    public ArrayList<Car> getCars(){
-        return cars;
-    }
-
-    private boolean isDuplicateName(ArrayList<Car> cars){
-        Set<String> nameSet = new HashSet<>();
-
-        for(int i = 0; i < cars.size() ; i++) {
-            if (!nameSet.add(cars.get(i).getName())) {
-                return true;
-            }
+    public void progressRounds(ArrayList<Car> cars, int round){
+        System.out.println("실행 결과");
+        for (int i = 0; i < round; i++){
+            moveCars(cars);
+            printScore(cars);
+            System.out.println(" ");
         }
-        return false;
-    }
-
-    private ArrayList<Car> setupCars(){
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
-        String input = Console.readLine();
-        String[] names = input.split(",");
-        ArrayList<Car> cars = new ArrayList<>();
-
-        for(int i = 0; i < names.length; i++){
-            if(names[i].length() > 5 || names[i].contains(" ") || names[i].isEmpty()){
-                throw new IllegalArgumentException();
-            }
-            cars.add(new Car(names[i]));
-        }
-        if(isDuplicateName(cars)){
-            throw new IllegalArgumentException();
-        }
-        return cars;
-    }
-
-    private int inputRound(){
-        System.out.println("시도할 회수는 몇회인가요?");
-        int round;
-
-        try {
-            round = Integer.parseInt(Console.readLine().trim());
-        } catch(NumberFormatException e){
-            throw new IllegalArgumentException();
-        }
-        if(round <= 0){
-            throw new IllegalArgumentException();
-        }
-        System.out.println(" ");
-        return round;
     }
 
     private void moveCars(ArrayList<Car> cars){
@@ -84,15 +33,6 @@ public class Race {
             for(int j = 0; j < cars.get(i).getScore(); j++){
                 System.out.print("-");
             }
-            System.out.println(" ");
-        }
-    }
-
-    private void progressRounds(int round, ArrayList<Car> cars){
-        System.out.println("실행 결과");
-        for (int i = 0; i < round; i++){
-            moveCars(cars);
-            printScore(cars);
             System.out.println(" ");
         }
     }
